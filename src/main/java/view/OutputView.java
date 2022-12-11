@@ -65,6 +65,8 @@ public class OutputView {
     public static int printTotalPay(TablePrice tablePrice, int tableNumber) {
         List<Menu> menus = tablePrice.getMenus();
         int totalPay = 0;
+        int cnt = 0;
+        int quantity = 0;
         System.out.println("## 주문 내역");
         System.out.println("메뉴 수량 금액");
         for (Menu menu : menus) {
@@ -72,7 +74,11 @@ public class OutputView {
                 System.out.println(menu.getName() + " " + menu.getQuantity() + " " + menu.getPrice());
                 totalPay += menu.getPrice()*menu.getQuantity();
             }
+            if (cnt < 6)
+                quantity += menu.getQuantity();
+            cnt++;
         }
+        totalPay -= (quantity/10)*10000;
         System.out.println("## " + tableNumber + "번 테이블의 결제를 진행합니다.");
         return totalPay;
     }

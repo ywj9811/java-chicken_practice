@@ -31,7 +31,7 @@ public class OrderService {
             return;
         }
     }
-
+    
     public void payFunction() {
         OutputView.printTables(tables);
         tableNumber = InputView.inputTableNumber();
