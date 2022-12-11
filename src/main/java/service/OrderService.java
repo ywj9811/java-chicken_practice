@@ -17,12 +17,14 @@ public class OrderService {
 
 
     public void whatFunction() {
+        OutputView.printStart();
         int number = InputView.wantFunction();
         if (number == 1) {
             orderFunction();
             whatFunction();
         }
         if (number == 2) {
+            payFunction();
             whatFunction();
         }
         if (number == 3) {
@@ -31,7 +33,20 @@ public class OrderService {
     }
 
     public void payFunction() {
-
+        OutputView.printTables(tables);
+        tableNumber = InputView.inputTableNumber();
+        int totalPay;
+        if (tableNumber < 7) {
+            totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 1), tableNumber);
+        } else {
+            totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 2), tableNumber);
+        }
+        int payNumber = InputView.inputPayNumber();
+        if (payNumber == 1) {
+            OutputView.printPay(totalPay);
+            return;
+        }
+        OutputView.printPay((int) (totalPay*(0.95)));
     }
 
     public void orderFunction() {
