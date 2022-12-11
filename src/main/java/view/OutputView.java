@@ -1,9 +1,6 @@
 package view;
 
-import domain.Menu;
-import domain.Table;
-import domain.TablePrice;
-import domain.TablePriceRepository;
+import domain.*;
 
 import java.util.List;
 
@@ -64,6 +61,7 @@ public class OutputView {
 
     public static int printTotalPay(TablePrice tablePrice, int tableNumber) {
         List<Menu> menus = tablePrice.getMenus();
+        List<Table> tables = TableRepository.tables();
         int totalPay = 0;
         int cnt = 0;
         int quantity = 0;
@@ -79,7 +77,7 @@ public class OutputView {
             cnt++;
         }
         totalPay -= (quantity/10)*10000;
-        System.out.println("## " + tableNumber + "번 테이블의 결제를 진행합니다.");
+        System.out.println("## " + tables.get(tableNumber) + "번 테이블의 결제를 진행합니다.");
         return totalPay;
     }
 
