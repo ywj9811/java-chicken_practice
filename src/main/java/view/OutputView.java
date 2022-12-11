@@ -26,7 +26,7 @@ public class OutputView {
         final int size = tables.size();
         printLine(TOP_LINE, size);
         printTableNumbers(tables);
-        printLine(BOTTOM_LINE, size);
+        printBottomLine(BOTTOM_LINE, size);
     }
 
     public static void printMenus(final List<Menu> menus) {
@@ -36,6 +36,13 @@ public class OutputView {
     }
 
     private static void printLine(final String line, final int count) {
+        for (int index = 0; index < count; index++) {
+            System.out.print(line);
+        }
+        System.out.println();
+    }
+
+    private static void printBottomLine(final String line, final int count) {
         List<TablePrice> tablePrices = TablePriceRepository.getTablePrices();
 
         for (int index = 0; index < count; index++) {
