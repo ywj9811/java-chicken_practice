@@ -47,7 +47,6 @@ public class PayService {
 
     private void outputWithTotalPay(int tableNumber) {
         TotalController totalController = new TotalController();
-
         try {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber), tableNumber);
             tablePrices.get(tableNumber).resetMenus();
