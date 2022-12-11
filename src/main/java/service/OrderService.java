@@ -7,8 +7,9 @@ import view.OutputView;
 import java.util.List;
 
 public class OrderService {
+    private MenuRepository menuRepository = new MenuRepository();
     private final List<Table> tables = TableRepository.tables();
-    private final List<Menu> menus = MenuRepository.menus();
+    private final List<Menu> menus = menuRepository.menus();
     private int tableNumber;
     private int menuNumber;
     private int menuCount;
