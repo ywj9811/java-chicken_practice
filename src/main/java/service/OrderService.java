@@ -36,14 +36,18 @@ public class OrderService {
         OutputView.printTables(tables);
         tableNumber = InputView.inputTableNumber();
         int totalPay;
-        if (tableNumber < 7) {
+        if (tableNumber < 5) {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 1), tableNumber);
             tablePrices.get(tableNumber - 1).resetMenus();
             tablePrices.get(tableNumber - 1).setOrder(0);
-        } else {
+        } else if (tableNumber < 8) {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 2), tableNumber);
             tablePrices.get(tableNumber - 2).resetMenus();
             tablePrices.get(tableNumber - 2).setOrder(0);
+        } else {
+            totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 3), tableNumber);
+            tablePrices.get(tableNumber - 3).resetMenus();
+            tablePrices.get(tableNumber - 3).setOrder(0);
         }
         int payNumber = InputView.inputPayNumber();
         if (payNumber == 1) {
@@ -59,12 +63,17 @@ public class OrderService {
         OutputView.printMenus(menus);
         menuNumber = InputView.inputMenuNumber();
         menuCount = InputView.menuCount();
-        if (tableNumber < 7) {
+        if (tableNumber < 5) {
             tablePrices.get(tableNumber - 1).setOrder(1);
             tablePrices.get(tableNumber - 1).setMenuQuantity(menuNumber, menuCount);
             return;
         }
-        tablePrices.get(tableNumber - 2).setOrder(1);
-        tablePrices.get(tableNumber - 2).setMenuQuantity(menuNumber, menuCount);
+        if (tableNumber < 8) {
+            tablePrices.get(tableNumber - 2).setOrder(1);
+            tablePrices.get(tableNumber - 2).setMenuQuantity(menuNumber, menuCount);
+            return;
+        }
+        tablePrices.get(tableNumber - 3).setOrder(1);
+        tablePrices.get(tableNumber - 3).setMenuQuantity(menuNumber, menuCount);
     }
 }
