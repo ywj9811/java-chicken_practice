@@ -6,13 +6,19 @@ import java.util.List;
 public class TablePrice {
     private final int table;
 
-    private final List<Menu> menus = MenuRepository.menus();
+    private static List<Menu> menus = MenuRepository.menus();
 
     public TablePrice(int table) {
         this.table = table;
     }
     public List<Menu> getMenus() {
         return menus;
+    }
+
+    public void resetMenus() {
+        for (Menu menu : menus) {
+            menu.resetQuantity();
+        }
     }
 
     public void setMenuQuantity(int menuNumber, int quantity) {
