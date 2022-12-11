@@ -38,8 +38,10 @@ public class OrderService {
         int totalPay;
         if (tableNumber < 7) {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 1), tableNumber);
+            tablePrices.get(tableNumber - 1).resetMenus();
         } else {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 2), tableNumber);
+            tablePrices.get(tableNumber - 2).resetMenus();
         }
         int payNumber = InputView.inputPayNumber();
         if (payNumber == 1) {
