@@ -47,9 +47,23 @@ public class OutputView {
         System.out.println();
     }
 
-    private static void printTotalPay(TablePrice tablePrice, int tableNumber) {
+    public static int printTotalPay(TablePrice tablePrice, int tableNumber) {
         List<Menu> menus = tablePrice.getMenus();
+        int totalPay = 0;
         System.out.println("## 주문 내역");
         System.out.println("메뉴 수량 금액");
+        for (Menu menu : menus) {
+            if (menu.getQuantity() > 0) {
+                System.out.println(menu.getName() + " " + menu.getQuantity() + " " + menu.getPrice());
+                totalPay += menu.getPrice()*menu.getQuantity();
+            }
+        }
+        System.out.println("## " + tableNumber + "번 테이블의 결제를 진행합니다.");
+        return totalPay;
+    }
+
+    public static void printPay(int totalPay) {
+        System.out.println("## 최종 결제할 금액");
+        System.out.println(totalPay + "원");
     }
 }
