@@ -47,10 +47,18 @@ public class PayService {
     }
 
     private void outputWithTotalPay(int tableNumber) {
-        totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber), tableNumber);
-        payValidation(totalPay);
-        tablePrices.get(tableNumber).resetMenus();
-        tablePrices.get(tableNumber).setOrder(0);
+        TotalController totalController = new TotalController();
+
+        try {
+            totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber), tableNumber);
+            validation.notOrderTable(totalPay);
+            tablePrices.get(tableNumber).resetMenus();
+            tablePrices.get(tableNumber).setOrder(0);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            totalController.whatFunction();
+            return;
+        }
     }
 
     private void payValidation(int price) {
