@@ -5,12 +5,19 @@ import java.util.List;
 public class TablePrice {
     MenuRepository menuRepository = new MenuRepository();
     private final int table;
+    private int order;
 
     private List<Menu> menus = menuRepository.menus();
 
-    public TablePrice(int table) {
+    public TablePrice(int table, int order) {
         this.table = table;
+        this.order = order;
     }
+
+    public int getOrder(){
+        return order;
+    }
+
     public List<Menu> getMenus() {
         return menus;
     }
