@@ -13,7 +13,6 @@ public class OrderService {
     private int tableNumber;
     private int menuNumber;
     private int menuCount;
-    private int price;
     private List<TablePrice> tablePrices = TablePriceRepository.getTablePrices();
 
 
@@ -40,9 +39,11 @@ public class OrderService {
         if (tableNumber < 7) {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 1), tableNumber);
             tablePrices.get(tableNumber - 1).resetMenus();
+            tablePrices.set(tableNumber - 1, new TablePrice(tableNumber - 1, 0));
         } else {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 2), tableNumber);
             tablePrices.get(tableNumber - 2).resetMenus();
+            tablePrices.set(tableNumber - 1, new TablePrice(tableNumber - 2, 0));
         }
         int payNumber = InputView.inputPayNumber();
         if (payNumber == 1) {
@@ -60,8 +61,10 @@ public class OrderService {
         menuCount = InputView.menuCount();
         if (tableNumber < 7) {
             tablePrices.get(tableNumber - 1).setMenuQuantity(menuNumber, menuCount);
+            tablePrices.set(tableNumber - 1, new TablePrice(tableNumber - 1, 1));
             return;
         }
         tablePrices.get(tableNumber - 2).setMenuQuantity(menuNumber, menuCount);
+        tablePrices.set(tableNumber - 2, new TablePrice(tableNumber - 2, 1));
     }
 }
