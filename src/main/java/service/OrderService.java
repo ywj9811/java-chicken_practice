@@ -13,57 +13,10 @@ public class OrderService {
     private int tableNumber;
     private int menuNumber;
     private int menuCount;
-    private int totalPay;
 
     private List<TablePrice> tablePrices = TablePriceRepository.getTablePrices();
 
-
-    public void whatFunction() {
-        OutputView.printStart();
-        int number = InputView.wantFunction();
-        if (number == 1) {
-            orderFunction();
-            whatFunction();
-        }
-        if (number == 2) {
-            payFunction();
-            whatFunction();
-        }
-        if (number == 3)
-            return;
-    }
-
-    private void payFunction() {
-        OutputView.printTables(tables);
-        tableNumber = InputView.inputTableNumber();
-        payWithTableNumber(tableNumber);
-        int payNumber = InputView.inputPayNumber();
-        if (payNumber == 1) {
-            OutputView.printPay(totalPay);
-            return;
-        }
-        OutputView.printPay((int) (totalPay*(0.95)));
-    }
-
-    private void payWithTableNumber(int tableNumber) {
-        if (tableNumber < 5) {
-            outputWithTotalPay(tableNumber - 1);
-            return;
-        }
-        if (tableNumber < 8) {
-            outputWithTotalPay(tableNumber - 2);
-            return;
-        }
-        outputWithTotalPay(tableNumber - 3);
-    }
-
-    private void outputWithTotalPay(int tableNumber) {
-        totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber), tableNumber);
-        tablePrices.get(tableNumber).resetMenus();
-        tablePrices.get(tableNumber).setOrder(0);
-    }
-
-    private void orderFunction() {
+    public void orderFunction() {
         OutputView.printTables(tables);
         tableNumber = InputView.inputTableNumber();
         OutputView.printMenus(menus);
