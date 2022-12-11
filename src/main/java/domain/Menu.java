@@ -6,6 +6,14 @@ public class Menu {
     private final Category category;
     private final int price;
 
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
     public Menu(final int number, final String name, final Category category, final int price) {
         this.number = number;
         this.name = name;
