@@ -1,12 +1,12 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TablePrice {
+    MenuRepository menuRepository = new MenuRepository();
     private final int table;
 
-    private static List<Menu> menus = MenuRepository.menus();
+    private List<Menu> menus = menuRepository.menus();
 
     public TablePrice(int table) {
         this.table = table;
