@@ -60,11 +60,19 @@ public class OrderService {
         menuNumber = InputView.inputMenuNumber();
         menuCount = InputView.menuCount();
         if (tableNumber < 7) {
-            tablePrices.get(tableNumber - 1).setMenuQuantity(menuNumber, menuCount);
+            if (tablePrices.get(tableNumber - 1).getOrder() == 1) {
+                tablePrices.get(tableNumber - 1).setMenuQuantity(menuNumber, menuCount);
+                return;
+            }
             tablePrices.set(tableNumber - 1, new TablePrice(tableNumber - 1, 1));
+            tablePrices.get(tableNumber - 1).setMenuQuantity(menuNumber, menuCount);
             return;
         }
-        tablePrices.get(tableNumber - 2).setMenuQuantity(menuNumber, menuCount);
+        if (tablePrices.get(tableNumber-2).getOrder() == 1) {
+            tablePrices.get(tableNumber - 2).setMenuQuantity(menuNumber, menuCount);
+            return;
+        }
         tablePrices.set(tableNumber - 2, new TablePrice(tableNumber - 2, 1));
+        tablePrices.get(tableNumber - 2).setMenuQuantity(menuNumber, menuCount);
     }
 }
