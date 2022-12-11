@@ -1,8 +1,10 @@
 package service;
 
+import controller.TotalController;
 import domain.Table;
 import domain.TablePrice;
 import domain.TablePriceRepository;
+import validation.InputValidation;
 import view.InputView;
 import view.OutputView;
 
@@ -13,6 +15,7 @@ public class PayService {
     private final List<Table> tables;
     private int tableNumber;
     private int totalPay;
+    private InputValidation validation = new InputValidation();
 
     public PayService(List<Table> tables, List<TablePrice> tablePrices) {
         this.tables = tables;
@@ -45,7 +48,19 @@ public class PayService {
 
     private void outputWithTotalPay(int tableNumber) {
         totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber), tableNumber);
+        payValidation(totalPay);
         tablePrices.get(tableNumber).resetMenus();
         tablePrices.get(tableNumber).setOrder(0);
+    }
+
+    private void payValidation(int price) {
+        TotalController totalController = new TotalController();
+        try {
+            validation.notOrderTable(price);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            totalController.whatFunction();
+            return;
+        }
     }
 }

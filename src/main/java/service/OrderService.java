@@ -1,6 +1,7 @@
 package service;
 
 import domain.*;
+import validation.InputValidation;
 import view.InputView;
 import view.OutputView;
 
@@ -13,7 +14,7 @@ public class OrderService {
     private int tableNumber;
     private int menuNumber;
     private int menuCount;
-
+    private InputValidation validation = new InputValidation();
     private List<TablePrice> tablePrices = TablePriceRepository.getTablePrices();
 
     public void orderFunction() {
