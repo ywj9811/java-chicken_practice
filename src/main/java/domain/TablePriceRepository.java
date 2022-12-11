@@ -10,7 +10,6 @@ public class TablePriceRepository {
         tablePrices.add(new TablePrice(1, 0));
         tablePrices.add(new TablePrice(2, 0));
         tablePrices.add(new TablePrice(3, 0));
-        tablePrices.add(new TablePrice(4, 0));
         tablePrices.add(new TablePrice(5, 0));
         tablePrices.add(new TablePrice(6, 0));
         tablePrices.add(new TablePrice(8, 0));
