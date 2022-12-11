@@ -5,7 +5,14 @@ public class Menu {
     private final String name;
     private final Category category;
     private final int price;
+    private int quantity;
 
+    public void setQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+    public int getQuantity() {
+        return quantity;
+    }
     public String getName() {
         return name;
     }
