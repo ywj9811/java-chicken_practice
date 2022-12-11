@@ -13,6 +13,8 @@ public class OrderService {
     private int tableNumber;
     private int menuNumber;
     private int menuCount;
+    private int totalPay;
+
     private List<TablePrice> tablePrices = TablePriceRepository.getTablePrices();
 
 
@@ -27,28 +29,14 @@ public class OrderService {
             payFunction();
             whatFunction();
         }
-        if (number == 3) {
+        if (number == 3)
             return;
-        }
     }
-    
-    public void payFunction() {
+
+    private void payFunction() {
         OutputView.printTables(tables);
         tableNumber = InputView.inputTableNumber();
-        int totalPay;
-        if (tableNumber < 5) {
-            totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 1), tableNumber);
-            tablePrices.get(tableNumber - 1).resetMenus();
-            tablePrices.get(tableNumber - 1).setOrder(0);
-        } else if (tableNumber < 8) {
-            totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 2), tableNumber);
-            tablePrices.get(tableNumber - 2).resetMenus();
-            tablePrices.get(tableNumber - 2).setOrder(0);
-        } else {
-            totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 3), tableNumber);
-            tablePrices.get(tableNumber - 3).resetMenus();
-            tablePrices.get(tableNumber - 3).setOrder(0);
-        }
+        payWithTableNumber(tableNumber);
         int payNumber = InputView.inputPayNumber();
         if (payNumber == 1) {
             OutputView.printPay(totalPay);
@@ -57,23 +45,47 @@ public class OrderService {
         OutputView.printPay((int) (totalPay*(0.95)));
     }
 
-    public void orderFunction() {
+    private void payWithTableNumber(int tableNumber) {
+        if (tableNumber < 5) {
+            outputWithTotalPay(tableNumber - 1);
+            return;
+        }
+        if (tableNumber < 8) {
+            outputWithTotalPay(tableNumber - 2);
+            return;
+        }
+        outputWithTotalPay(tableNumber - 3);
+    }
+
+    private void outputWithTotalPay(int tableNumber) {
+        totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber), tableNumber);
+        tablePrices.get(tableNumber).resetMenus();
+        tablePrices.get(tableNumber).setOrder(0);
+    }
+
+    private void orderFunction() {
         OutputView.printTables(tables);
         tableNumber = InputView.inputTableNumber();
         OutputView.printMenus(menus);
         menuNumber = InputView.inputMenuNumber();
         menuCount = InputView.menuCount();
+        orderWithTableNumber();
+    }
+
+    private void orderWithTableNumber() {
         if (tableNumber < 5) {
-            tablePrices.get(tableNumber - 1).setOrder(1);
-            tablePrices.get(tableNumber - 1).setMenuQuantity(menuNumber, menuCount);
+            settingPriceAndQuantity(tableNumber - 1);
             return;
         }
         if (tableNumber < 8) {
-            tablePrices.get(tableNumber - 2).setOrder(1);
-            tablePrices.get(tableNumber - 2).setMenuQuantity(menuNumber, menuCount);
+            settingPriceAndQuantity(tableNumber - 2);
             return;
         }
-        tablePrices.get(tableNumber - 3).setOrder(1);
-        tablePrices.get(tableNumber - 3).setMenuQuantity(menuNumber, menuCount);
+        settingPriceAndQuantity(tableNumber - 3);
+    }
+
+    private void settingPriceAndQuantity(int listIndex) {
+        tablePrices.get(listIndex).setOrder(1);
+        tablePrices.get(listIndex).setMenuQuantity(menuNumber, menuCount);
     }
 }
