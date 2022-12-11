@@ -18,6 +18,10 @@ public class TablePrice {
         return order;
     }
 
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
     public List<Menu> getMenus() {
         return menus;
     }
