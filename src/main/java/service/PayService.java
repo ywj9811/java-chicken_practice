@@ -15,7 +15,6 @@ public class PayService {
     private final List<Table> tables;
     private int tableNumber;
     private int totalPay;
-    private InputValidation validation = new InputValidation();
 
     public PayService(List<Table> tables, List<TablePrice> tablePrices) {
         this.tables = tables;
@@ -51,20 +50,8 @@ public class PayService {
 
         try {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber), tableNumber);
-            validation.notOrderTable(totalPay);
             tablePrices.get(tableNumber).resetMenus();
             tablePrices.get(tableNumber).setOrder(0);
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-            totalController.whatFunction();
-            return;
-        }
-    }
-
-    private void payValidation(int price) {
-        TotalController totalController = new TotalController();
-        try {
-            validation.notOrderTable(price);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
             totalController.whatFunction();
