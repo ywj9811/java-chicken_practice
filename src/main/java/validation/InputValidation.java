@@ -18,6 +18,11 @@ public class InputValidation {
             throw new IllegalArgumentException("[ERROR] 테이블 번호를 확인해 주세요.");
     }
 
+    public void notNumberOfOrder(int number) {
+        if (!(number == 1 || number == 2))
+            throw new IllegalArgumentException("[ERROR] 번호를 다시 확인해주세요.");
+    }
+
     public void notOrderTable(int price) {
         if (price == 0) {
             throw new IllegalArgumentException("[ERROR] 주문을 확인해 주세요.");

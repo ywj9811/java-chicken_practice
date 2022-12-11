@@ -1,18 +1,35 @@
 package view;
 
+import validation.InputValidation;
+
 import java.util.Scanner;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
+    private static final InputValidation validation = new InputValidation();
 
     public static int wantFunction() {
-        System.out.println("## 원하는 기능을 선택하세요.");
-        return scanner.nextInt();
+        try {
+            System.out.println("## 원하는 기능을 선택하세요.");
+            int number = scanner.nextInt();
+            validation.notNumberInRange(number);
+            return number;
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return wantFunction();
+        }
     }
 
     public static int inputTableNumber() {
-        System.out.println("## 테이블을 선택하세요.");
-        return scanner.nextInt();
+        try {
+            System.out.println("## 테이블을 선택하세요.");
+            int number = scanner.nextInt();
+            validation.notNumberOfTable(number);
+            return number;
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return inputTableNumber();
+        }
     }
 
     public static int inputMenuNumber() {
@@ -26,7 +43,14 @@ public class InputView {
     }
 
     public static int inputPayNumber() {
-        System.out.println("## 신용 카드는 1번, 현금은 2번");
-        return scanner.nextInt();
+        try {
+            System.out.println("## 신용 카드는 1번, 현금은 2번");
+            int number = scanner.nextInt();
+            validation.notNumberOfOrder(number);
+            return number;
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return inputPayNumber();
+        }
     }
 }
