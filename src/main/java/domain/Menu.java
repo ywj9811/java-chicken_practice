@@ -10,6 +10,11 @@ public class Menu {
     public void setQuantity(int quantity) {
         this.quantity += quantity;
     }
+
+    public void resetQuantity() {
+        this.quantity = 0;
+    }
+
     public int getQuantity() {
         return quantity;
     }
