@@ -2,6 +2,7 @@ package view;
 
 import domain.Menu;
 import domain.Table;
+import domain.TablePrice;
 
 import java.util.List;
 
@@ -44,5 +45,11 @@ public class OutputView {
             System.out.printf(TABLE_FORMAT, table);
         }
         System.out.println();
+    }
+
+    private static void printTotalPay(TablePrice tablePrice, int tableNumber) {
+        List<Menu> menus = tablePrice.getMenus();
+        System.out.println("## 주문 내역");
+        System.out.println("메뉴 수량 금액");
     }
 }
