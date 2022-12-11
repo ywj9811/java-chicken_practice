@@ -39,11 +39,11 @@ public class OrderService {
         if (tableNumber < 7) {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 1), tableNumber);
             tablePrices.get(tableNumber - 1).resetMenus();
-            tablePrices.set(tableNumber - 1, new TablePrice(tableNumber - 1, 0));
+            tablePrices.get(tableNumber - 1).setOrder(0);
         } else {
             totalPay = OutputView.printTotalPay(tablePrices.get(tableNumber - 2), tableNumber);
             tablePrices.get(tableNumber - 2).resetMenus();
-            tablePrices.set(tableNumber - 1, new TablePrice(tableNumber - 2, 0));
+            tablePrices.get(tableNumber - 2).setOrder(0);
         }
         int payNumber = InputView.inputPayNumber();
         if (payNumber == 1) {
@@ -60,19 +60,11 @@ public class OrderService {
         menuNumber = InputView.inputMenuNumber();
         menuCount = InputView.menuCount();
         if (tableNumber < 7) {
-            if (tablePrices.get(tableNumber - 1).getOrder() == 1) {
-                tablePrices.get(tableNumber - 1).setMenuQuantity(menuNumber, menuCount);
-                return;
-            }
-            tablePrices.set(tableNumber - 1, new TablePrice(tableNumber - 1, 1));
+            tablePrices.get(tableNumber - 1).setOrder(1);
             tablePrices.get(tableNumber - 1).setMenuQuantity(menuNumber, menuCount);
             return;
         }
-        if (tablePrices.get(tableNumber-2).getOrder() == 1) {
-            tablePrices.get(tableNumber - 2).setMenuQuantity(menuNumber, menuCount);
-            return;
-        }
-        tablePrices.set(tableNumber - 2, new TablePrice(tableNumber - 2, 1));
+        tablePrices.get(tableNumber - 2).setOrder(1);
         tablePrices.get(tableNumber - 2).setMenuQuantity(menuNumber, menuCount);
     }
 }
