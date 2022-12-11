@@ -3,10 +3,12 @@ package view;
 import domain.Menu;
 import domain.Table;
 import domain.TablePrice;
+import domain.TablePriceRepository;
 
 import java.util.List;
 
 public class OutputView {
+
     private static final String TOP_LINE = "┌ ─ ┐";
     private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
@@ -34,7 +36,13 @@ public class OutputView {
     }
 
     private static void printLine(final String line, final int count) {
+        List<TablePrice> tablePrices = TablePriceRepository.getTablePrices();
+
         for (int index = 0; index < count; index++) {
+            if (tablePrices.get(index).getOrder() == 1) {
+                System.out.print(ORDER_BOTTOM_LINE);
+                continue;
+            }
             System.out.print(line);
         }
         System.out.println();
